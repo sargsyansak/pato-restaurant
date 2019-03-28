@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+</head>
+<body>
+<div th:if="${messageMenu!=null}">
+    <h2 style="color: red" th:text="${messageMenu}"></h2>
+</div>
+<h1>MENU</h1>
+<form action="/menu" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="menu name"><br>
+    <input type="file" name="picture"><br>
+    <input type="submit" value="ADD MENU"><br>
+</form>
+<hr>
+<br>
+<div th:if="${messageItem!=null}">
+    <h2 style="color: red" th:text="${messageItem}"></h2>
+</div>
+<h1>MENU ITEM</h1>
+<form action="/menuItem" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="menuItem name"><br>
+    <input type="text" name="description" placeholder="description"><br>
+    <input type="text" name="price" placeholder="price"><br>
+    <input type="file" name="picture"><br>
+    Menu: <select name="menu.id">
+    <option th:each="menu : ${menues}" th:value="${menu.id}" th:text="${menu.name}">
+    </option>
+</select><br>
+    <input type="submit" value="ADD MENUITEM"><br>
+</form>
+<hr>
+<br>
+<div th:if="${messageGalleryCategories!=null}">
+    <h2 style="color: red" th:text="${messageGalleryCategories}"></h2>
+</div>
+<h1>GALLERY CATEGORIES</h1>
+<form action="/galleryCategories" method="post">
+    <input type="text" name="name" placeholder="name"><br>
+    <input type="submit" value="ADD GALLERY CATEGORIES"><br>
+</form>
+<hr>
+<br>
+<h1>GALLERY</h1>
+<form action="/gallery" method="post" enctype="multipart/form-data">
+    <input type="file" name="picture"><br>
+    Gallery Categories: <select name="category">
+    <option th:each="categories : ${galleryCategories}" th:value="${categories.id}" th:text="${categories.name}">
+    </option>
+</select><br>
+    <input type="submit" value="ADD GALLERY"><br>
+</form>
+<hr>
+<br>
+
+<div th:if="${messageReservation!=null}">
+    <h2 style="color: red" th:text="${messageReservation}"></h2>
+</div>
+<h1>Reservation</h1>
+<form action="/reservation" method="post">
+
+    <input type="text" name="name" placeholder="name"><br>
+    <input type="text" name="email" placeholder="email"><br>
+    <input type="text" name="phone" placeholder="phone"><br>
+    <input type="number" name="count" placeholder="count"><br>
+    Time: <input type="time" name="time"><br>
+    Date: <input type="date" min="2000-01-01" max="2020-01-01" name="datee"><br>
+
+    <input type="submit" value="ADD RESERVATION"><br>
+</form>
+<hr>
+<br>
+<h1>SLIDER</h1>
+<form action="/slider" method="post" enctype="multipart/form-data">
+    <input type="text" name="text" placeholder="text"><br>
+    <input type="text" name="description" placeholder="description"><br>
+    <input type="file" name="picSlider"><br>
+    <input type="submit" value="ADD SLIDER"><br>
+</form>
+<hr>
+<br>
+<h1>EMPLOYEE</h1>
+<form action="/employee" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="name"><br>
+    <input type="text" name="surname" placeholder="surname"><br>
+    <input type="text" name="description" placeholder="description"><br>
+    <input type="text" name="ratingg" placeholder="rating"><br>
+    Position: <select name="employeeType">
+    <option value=" COOK_ASSISTANT"> COOK_ASSISTANT</option>
+    <option value="COOK_CHIEF">COOK_CHIEF</option>
+    <option value="COOK">COOK</option>
+    <option value="WAITER">WAITER</option>
+    <option value="MANAGER">MANAGER</option>
+    <option value="CLEANER">CLEANER</option>
+</select><br>
+    <input type="file" name="picEmployee"><br>
+    <input type="submit" value="ADD EMPLOYEE">
+</form>
+<hr>
+<br>
+<h1>CONTACT</h1>
+<form action="/contact" method="post">
+    <input type="text" name="name" placeholder="name"><br>
+    <input type="text" name="email" placeholder="email"><br>
+    <input type="text" name="phone" placeholder="phone"><br>
+    <input type="text" name="message" placeholder="message"><br>
+    <input type="submit" value="SEND">
+</form>
+<hr>
+<br>
+<h1>BLOG</h1>
+<form action="/blog" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="name"><br>
+    <input type="text" name="description" placeholder="description"><br>
+    Mneu: <label>
+    <input type="checkbox" th:each=" menu:${menues}" th:value="${menu.id}" th:text="${menu.name}" name="menuList">
+</label><br>
+
+    <input type="file" name="picBlog"><br>
+    <input type="submit" value="ADD BLOG"><br><br>
+
+
+</form>
+<br>
+<h1>COMMENT</h1>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Picture</td>
+    </tr>
+    <tr th:each="blog:${blogs}">
+        <td th:text="${blog.name}"></td>
+        <td th:text="${blog.description}"></td>
+        <td><a href="/blog/current"><img th:src="@{/blog/getImage(imgBlog=${blog.blogPicUrl})}" width="50"></a></td>
+    </tr>
+</table>
+<br>
+<form action="/comment" method="post">
+    Blog: <label>
+    <input type="checkbox" name="blogItems" th:each=" blog :${blogs}" th:value="${blog.id}" th:text="${blog.name}">
+</label><br>
+    <input type="text" name="text" placeholder="text"><br>
+    <input type="text" name="name" placeholder="name"><br>
+    <input type="text" name="email" placeholder="email"><br>
+    <input type="submit" value="COMMENT"><br>
+</form>
+
+
+</body>
+</html>

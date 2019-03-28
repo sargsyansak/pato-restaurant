@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN</title>
+</head>
+<body>
+<h2 style="color: red" th:if="${messageUser!=null}" th:text="${messageUser}"></h2>
+<h3 style="color: #007bff">USER REGISTER</h3>
+<form action="/register" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="name"><br>
+    <input type="text" name="surname" placeholder="surname"><br>
+    <input type="text" name="email" placeholder="email"><br>
+    <input type="password" name="password" placeholder="password"><br>
+    <input type="text" name="phone" placeholder="phone"><br>
+    <input type="file" name="picture"><br>
+    <input type="submit" value="Register"><br>
+    <a href="/login">Login Page</a>
+
+</form>
+
+</body>
+</html>
